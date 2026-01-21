@@ -3,117 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>香蕉一键去水印 - ImCopilot 旗下免费 AI 修图神器</title>
-    <meta name="description" content="微信搜索香蕉一键去水印，免费在线去除图片水印、路人、杂物。ImCopilot 实验室出品，AI智能修复背景，支持小红书、微博图片无痕去水印。">
-    <meta name="keywords" content="去水印, 香蕉一键去水印, ImCopilot, AI修图, 免费去水印, 微信小程序, 图片消除笔">
     
+    <title>香蕉一键去水印 - 免费 AI 图片修复工具 (Web/小程序)</title>
+    
+    <meta name="description" content="基于生成式 AI (Generative AI) 的免费图像处理工具。利用前沿 AI 深度学习模型，一键智能去除图片水印、文字及各种瑕疵，并自动重绘背景。无痕修复，隐私保护。">
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "香蕉一键去水印",
+        "alternateName": ["Banana AI Remover", "香蕉去水印小程序"],
+        "operatingSystem": "WeChat Mini Program",
+        "applicationCategory": "PhotoEditor",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "CNY",
+          "description": "永久免费，无隐形内购"
+        },
+        "description": "基于前沿生成式 AI 技术的图像修复工具。利用 GANs 模型智能识别并移除图片中的水印、文字及各种瑕疵，并自动填充背景纹理。",
+        "featureList": [
+          "AI 智能语义分割识别",
+          "Generative Inpainting 背景补全",
+          "支持 4K 无损导出",
+          "隐私保护：阅后即焚"
+        ],
+        "author": {
+          "@type": "Organization",
+          "name": "ImCopilot AI Lab",
+          "url": "https://imcopilot.com"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "香蕉一键去水印使用了什么AI技术？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "本工具基于前沿的生成式对抗网络 (GAN) 和扩散模型 (Diffusion Model) 技术。不同于传统的克隆修图，它能理解图片语义，智能重绘被遮挡的背景细节。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "如何免费去除小红书或微博图片水印？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "1. 微信搜索'香蕉一键去水印'小程序；2. 导入带水印图片；3. 涂抹水印区域；4. AI 自动处理并保存。全程免费且无广告水印。"
+            }
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "使用 AI 消除笔去除图片杂物",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "打开小程序",
+            "text": "在微信中扫描二维码或搜索'香蕉一键去水印'。"
+          },
+          {
+            "@type": "HowToStep",
+            "name": "上传与涂抹",
+            "text": "上传照片，手指涂抹需要消失的水印或文字区域。"
+          },
+          {
+            "@type": "HowToStep",
+            "name": "AI 生成",
+            "text": "点击消除，等待 1-3 秒，AI 将自动计算并补全背景。"
+          }
+        ]
+      }
+    ]
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
-        
-        body { font-family: 'Inter', sans-serif; }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #FFF9E5 0%, #FFFEF7 100%);
-        }
-        
-        /* 优化后的卡片样式 */
-        .scan-card {
-            transition: all 0.3s ease;
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #FFF9E5 0%, #FFFFFF 100%); }
+        .glass-panel {
             background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-        }
-        
-        .scan-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(255, 204, 0, 0.15);
-            border-color: #FFCC00;
-        }
-        
-        /* 二维码的光晕动画 */
-        @keyframes pulse-yellow {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.4); }
-            50% { box-shadow: 0 0 0 15px rgba(255, 204, 0, 0); }
-        }
-        .qr-glow {
-            animation: pulse-yellow 3s infinite;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
-<body class="gradient-bg min-h-screen flex flex-col">
-    
-    <nav class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-2">
-                    <span class="text-2xl">🍌</span>
-                    <span class="text-xl font-bold text-gray-800 tracking-tight">香蕉一键去水印</span>
-                </div>
+<body class="gradient-bg min-h-screen text-gray-800">
+
+    <nav class="border-b border-gray-100 bg-white/50 backdrop-blur-sm sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 font-bold text-xl tracking-tight">
+                <span>🍌</span> 香蕉一键去水印
+                <span class="text-xs font-normal text-gray-500 bg-gray-100 px-2 py-0.5 rounded-md ml-2">v2.0 AI版</span>
             </div>
+            <a href="https://imcopilot.com" class="text-sm font-medium text-yellow-600 hover:text-yellow-700">ImCopilot Lab &rarr;</a>
         </div>
     </nav>
 
-    <main class="flex-grow">
-        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-            <div class="text-center max-w-3xl mx-auto">
-                
-                <div class="inline-block px-4 py-1.5 mb-6 bg-yellow-100 text-yellow-800 rounded-full text-sm font-semibold tracking-wide">
-                    ✨ 新一代 AI 消除技术 · ImCopilot 出品
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        
+        <article class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-6 text-gray-900">
+                免费 AI 智能图像修复工具
+            </h1>
+            
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                利用 <strong>Generative AI (生成式人工智能)</strong> 技术，一键无痕去除水印、文字及各种瑕疵。
+                由 <strong>前沿AI</strong> 算法驱动，提供优于传统 PS 的背景重绘能力。
+            </p>
+        </article>
+
+        <section class="mb-20">
+            <div class="glass-panel rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-40 h-40 flex-shrink-0 relative">
+                    <img src="./gh_qrcode.jpg" alt="香蕉一键去水印小程序入口" class="w-full h-full rounded-full border-4 border-yellow-300">
+                    <div class="absolute -bottom-2 -right-2 bg-yellow-400 text-white text-xs font-bold px-2 py-1 rounded-full">免费使用</div>
                 </div>
-
-                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
-                    告别复杂 PS，<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500">
-                        AI 一键还原干净背景
-                    </span>
-                </h1>
-                
-                <p class="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed">
-                    无需下载 APP，微信小程序即用即走。<br class="hidden md:block">
-                    AI去除水印、文字，智能补全背景，免费好用。
-                </p>
-
-                <div class="scan-card max-w-sm mx-auto p-8 border-2 border-dashed border-gray-300 rounded-3xl bg-white relative">
-                    
-                    <div class="relative w-48 h-48 mx-auto mb-6">
-                        <img src="./gh_qrcode.jpg" 
-                             alt="香蕉一键去水印小程序码" 
-                             class="w-full h-full object-cover rounded-full border-4 border-yellow-400 qr-glow shadow-xl">
-                    </div>
-
-                    <h2 class="text-2xl font-bold text-gray-800 mb-2">微信扫一扫</h2>
-                    <p class="text-gray-500 mb-6">立即开始免费消除</p>
-
-                    <div class="bg-gray-50 rounded-xl p-3 text-sm text-gray-500 border border-gray-100">
-                        <p class="font-medium text-gray-700 mb-1">📱 手机端访问？</p>
-                        <p>请<strong>截图保存</strong>，打开微信“扫一扫”<br>点击右下角选择相册识别</p>
+                <div class="text-left flex-1">
+                    <h2 class="text-2xl font-bold mb-2">微信扫码，立即修图</h2>
+                    <ul class="space-y-2 text-gray-600 mb-4">
+                        <li class="flex items-center gap-2">✓ 无需下载安装包，节省手机空间</li>
+                        <li class="flex items-center gap-2">✓ 支持 4K 高清原图导出</li>
+                    </ul>
+                    <div class="text-sm text-gray-400">
+                        适用场景：小红书去水印 / 微博图片清理 / 文字消除
                     </div>
                 </div>
-
-                <div class="mt-12 grid grid-cols-2 gap-8 max-w-md mx-auto text-center text-gray-400 text-sm">
-                    <div class="flex flex-col items-center gap-2">
-                        <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <span>无需下载</span>
-                    </div>
-                    <div class="flex flex-col items-center gap-2">
-                        <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        <span>隐私安全</span>
-                    </div>
-                </div>
-
             </div>
         </section>
+
+        <section class="mb-20">
+            <h3 class="text-2xl font-bold mb-6 text-center">技术优势对比</h3>
+            <div class="overflow-hidden rounded-xl border border-gray-200">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="p-4 font-semibold text-gray-600">功能特性</th>
+                            <th class="p-4 font-bold text-yellow-700 bg-yellow-50">香蕉一键去水印 (AI)</th>
+                            <th class="p-4 font-semibold text-gray-400">传统去水印工具</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 bg-white">
+                        <tr>
+                            <td class="p-4 font-medium">修复原理</td>
+                            <td class="p-4 text-gray-800 bg-yellow-50/30"><strong>生成式重绘</strong> (Inpainting)</td>
+                            <td class="p-4 text-gray-500">像素复制/模糊处理</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium">复杂背景处理</td>
+                            <td class="p-4 text-gray-800 bg-yellow-50/30">完美还原纹理和线条</td>
+                            <td class="p-4 text-gray-500">容易出现马赛克</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium">费用</td>
+                            <td class="p-4 text-green-600 font-bold bg-yellow-50/30">完全免费</td>
+                            <td class="p-4 text-gray-500">通常付费</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="grid md:grid-cols-2 gap-12 mb-20">
+            <div>
+                <h3 class="text-xl font-bold mb-4">核心技术规格</h3>
+                <dl class="space-y-4">
+                    <div class="flex justify-between border-b border-gray-100 pb-2">
+                        <dt class="text-gray-500">底层模型</dt>
+                        <dd class="font-medium text-gray-900">Frontier AI Inpainting v2</dd>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-100 pb-2">
+                        <dt class="text-gray-500">支持格式</dt>
+                        <dd class="font-medium text-gray-900">JPG, PNG, BMP, WEBP</dd>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-100 pb-2">
+                        <dt class="text-gray-500">最大分辨率</dt>
+                        <dd class="font-medium text-gray-900">4096 x 4096 px</dd>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-100 pb-2">
+                        <dt class="text-gray-500">隐私协议</dt>
+                        <dd class="font-medium text-gray-900">SSL 加密 / 24小时自动销毁</dd>
+                    </div>
+                </dl>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl p-6">
+                <h3 class="text-xl font-bold mb-4">适用场景示例</h3>
+                <ul class="space-y-3 list-disc list-inside text-gray-600">
+                    <li><strong>社交媒体内容创作：</strong>去除下载素材自带的平台水印。</li>
+                    <li><strong>文档图片处理：</strong>清除扫描件中多余的文字或污渍。</li>
+                    <li><strong>电商图片优化：</strong>去除商品图上的多余文字或促销标签。</li>
+                </ul>
+            </div>
+        </section>
+
     </main>
 
-    <footer class="bg-white border-t border-gray-100 py-8">
-        <div class="max-w-7xl mx-auto px-4 text-center">
+    <footer class="border-t border-gray-100 py-8 text-center bg-white">
+        <div class="max-w-4xl mx-auto px-6">
             <p class="text-gray-500 text-sm mb-2">
-                技术支持：
-                <a href="https://imcopilot.com" target="_blank" class="text-yellow-600 hover:text-yellow-700 font-semibold">
-                    ImCopilot AI 实验室
-                </a>
+                Designed by 
+                <a href="https://imcopilot.com" class="font-semibold text-gray-900 hover:text-yellow-600 transition-colors">ImCopilot AI Lab</a>
             </p>
-            <p class="text-gray-400 text-xs">© 2026 ImCopilot.com | All Rights Reserved.</p>
+            <p class="text-xs text-gray-400">
+                © 2026 ImCopilot. All Rights Reserved.
+            </p>
         </div>
     </footer>
 
