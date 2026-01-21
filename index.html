@@ -30,9 +30,6 @@
             border-color: #FFCC00;
         }
         
-        .nav-link { transition: color 0.3s ease; }
-        .nav-link:hover { color: #FFCC00; }
-        
         /* 二维码的光晕动画 */
         @keyframes pulse-yellow {
             0%, 100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.4); }
@@ -50,12 +47,8 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-2">
                     <span class="text-2xl">🍌</span>
-                    <span class="text-xl font-bold text-gray-800 tracking-tight">香蕉去水印</span>
+                    <span class="text-xl font-bold text-gray-800 tracking-tight">香蕉一键去水印</span>
                 </div>
-                <a href="https://imcopilot.com" class="nav-link text-sm md:text-base text-gray-600 font-medium flex items-center gap-1">
-                    <span>ImCopilot 实验室</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                </a>
             </div>
         </div>
     </nav>
@@ -77,7 +70,7 @@
                 
                 <p class="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed">
                     无需下载 APP，微信小程序即用即走。<br class="hidden md:block">
-                    智能去除水印、文字、路人，每日免费额度赠送中。
+                    AI去除水印、文字，智能补全背景，免费好用。
                 </p>
 
                 <div class="scan-card max-w-sm mx-auto p-8 border-2 border-dashed border-gray-300 rounded-3xl bg-white relative">
@@ -97,14 +90,10 @@
                     </div>
                 </div>
 
-                <div class="mt-12 grid grid-cols-3 gap-4 text-center text-gray-400 text-sm">
+                <div class="mt-12 grid grid-cols-2 gap-8 max-w-md mx-auto text-center text-gray-400 text-sm">
                     <div class="flex flex-col items-center gap-2">
                         <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         <span>无需下载</span>
-                    </div>
-                    <div class="flex flex-col items-center gap-2">
-                        <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <span>3秒出图</span>
                     </div>
                     <div class="flex flex-col items-center gap-2">
                         <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
