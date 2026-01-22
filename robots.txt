@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# 专门向 AI 搜索示好
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# 指明您的站点地图位置（如果有的话）
+Sitemap: https://imcopilot.com/sitemap.xml
